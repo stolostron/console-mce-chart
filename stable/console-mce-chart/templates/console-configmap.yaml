@@ -1,0 +1,18 @@
+# Copyright Contributors to the Open Cluster Management project
+{{- if include "dynamicPlugins.supported" . }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: console-config
+  labels:
+    app: console
+    component: "console"
+    chart: {{ template "console.chart" . }}
+    release: {{ template "console.fullname" . }}
+    heritage: {{ .Release.Service }}
+data:
+  LOG_LEVEL: info
+  ansibleIntegration: disabled
+  singleNodeOpenshift: disabled
+{{- end -}}
+ 
